@@ -30,6 +30,6 @@ ng serve
 
 You will now be able to use the application on [http://localhost:4200](http://localhost:4200/)
 
-La documentation des root de l'application Spring est disponible à l'url suivante : [http://localhost:3001/api/swagger-ui/index.html](http://localhost:3001/api/swagger-ui/index.html)
+The documentation for the Spring application's routes is available at the following URL : [http://localhost:3001/api/swagger-ui/index.html](http://localhost:3001/api/swagger-ui/index.html)
 
 
