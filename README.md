@@ -30,7 +30,7 @@ ng serve
 
 You will now be able to use the application on [http://localhost:4200](http://localhost:4200/)
 
-The documentation for the Spring application's routes is available at the following URL : [http://localhost:3001/api/swagger-ui/index.html](http://localhost:3001/api/swagger-ui/index.html)
+The documentation for the Spring application's routes is available at the following URL : [http://localhost:3001/api/swagger-ui/index.html](http://localhost:3001/api/swagger-ui/index.html) <br />
 Routes register and login don't require any authentication, they give in response a jwt key that will be needed for other routes. 
 
 
