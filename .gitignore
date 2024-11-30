@@ -1,0 +1,9 @@
+db/mysql-data/*
+!db/mysql-data/*.frm
+!db/mysql-data/*.ibd
+!db/mysql-data/*.MYD
+!db/mysql-data/*.MYI
+!db/mysql-data/*.ibdata1
+!db/mysql-data/*.ib_logfile*
+
+.env

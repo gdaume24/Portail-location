@@ -1,0 +1,14 @@
+name: back-project-oc
+services:
+  db:
+    container_name: db
+    build:
+      context: .
+      dockerfile: db.dockerfile
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_USER: ${SPRING_DATASOURCE_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      MYSQL_DATABASE: my_database
+    restart: unless-stopped
