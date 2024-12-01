@@ -1,6 +1,13 @@
-## Spring app created from an angular front-end with mockoon exigences
+# Spring app created from an angular front-end with mockoon exigences
+## Requirements
+- **Java 17**
+- **Docker**
+- **Node js with angular package :**
+```console
+npm install -g @angular/cli
+```
 
-To start the project :
+## To Start the Project
 
 - Clone the repository <br />
 ```console
