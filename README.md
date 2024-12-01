@@ -2,7 +2,7 @@
 ## Requirements
 - **Java 17**
 - **Docker**
-- **Node js with angular package**
+- **Node js with angular package :**
 ```console
 npm install -g @angular/cli
 ```
