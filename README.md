@@ -1,5 +1,5 @@
 ## Spring app created from an angular front-end with mockoon exigences
-Requirements : Java 17, Docker
+<u>Requirements</u> : Java 17, Docker
 To start the project :
 
 - Clone the repository <br />
