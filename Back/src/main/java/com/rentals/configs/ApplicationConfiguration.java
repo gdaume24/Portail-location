@@ -1,7 +1,5 @@
 package com.rentals.configs;
 
-import com.rentals.repository.UserRepository;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +9,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.rentals.repository.UserRepository;
 
 @Configuration
 public class ApplicationConfiguration {
@@ -37,6 +37,7 @@ public class ApplicationConfiguration {
     }
 
     @Bean
+    // Fonction pour vérifier qu'on a un utilisateur avec le bon mot de passe 
     AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
