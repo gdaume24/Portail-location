@@ -43,6 +43,7 @@ public class RentalService {
     public CreateRentalResponse createRentalService(PostRentalRequestDto postRentalRequestDto) throws IOException {
 
         User currentUser = userService.getAuthenticatedUser();        
+        
         MultipartFile multipartFile = postRentalRequestDto.getPicture();
         String filename = multipartFile.getOriginalFilename();
         if (filename == null) {
@@ -50,6 +51,7 @@ public class RentalService {
         }
         String fileName = StringUtils.cleanPath(filename);
 
+        // On créé un objet Rental avec le nom du fichier image, l'user sert à indiquer à la clef étrangère de quel user il s'agit
         Rental rental = new Rental();
         rental.setName(postRentalRequestDto.getName());
         rental.setSurface(postRentalRequestDto.getSurface());
@@ -58,12 +60,14 @@ public class RentalService {
         rental.setUser(currentUser);
         rental.setPicture(fileName);
 
+        // Le chemin d'enregistrement des images est défini dans le fichier application.properties (C:\Tests)
         Path uploadPath = Paths.get(uploadDir);
 
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
+        // Enregistre l'image
         try (InputStream inputStream = multipartFile.getInputStream()) {
             Path filePath = uploadPath.resolve(fileName);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
@@ -80,12 +84,14 @@ public class RentalService {
 
         Rental existingRental = rentalRepository.findById(id).orElse(null);
 
+        // Vérifie si l'utilisateur est le propriètaire de l'offre de location 
         Long owner_id = existingRental.getUser().getId();
         Long current_user_id = userService.getAuthenticatedUser().getId();
         if (!owner_id.equals(current_user_id)) {
             throw new RuntimeException("You are not the owner of this rental.");
         }
 
+        // Modifie les valeurs du rental existant
         existingRental.setName(postRentalRequestDto.getName());
         existingRental.setSurface(postRentalRequestDto.getSurface());
         existingRental.setPrice(postRentalRequestDto.getPrice());

@@ -20,7 +20,7 @@ public class RentalDtoMapper {
         rentalDto.setCreated_at(rental.getCreatedAt());
         rentalDto.setUpdated_at(rental.getUpdatedAt());
 
-        String baseUrl = "http://localhost:3001/api"; // Remplacez par votre URL de base
+        String baseUrl = "http://localhost:3001/api";
         String imagePath = "/rentals-photos/" + rental.getPicture();
         rentalDto.setPicture(baseUrl + imagePath);
         
