@@ -1,6 +1,7 @@
 package com.rentals.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,8 @@ import com.rentals.dtos.request.LoginRequestDto;
 import com.rentals.dtos.request.RegisterRequestDto;
 import com.rentals.dtos.responses.AuthMeReponse;
 import com.rentals.dtos.responses.AuthReponse;
+import com.rentals.exceptions.BadRequestException;
+import com.rentals.exceptions.UnauthorizedException;
 import com.rentals.services.AuthenticationService;
 import com.rentals.services.UserService;
 
@@ -30,20 +33,24 @@ public class AuthenticationController {
     public ResponseEntity<AuthReponse> register(@RequestBody RegisterRequestDto registerRequestDto) {
 
         if (authenticationService.hasUserWithEmail(registerRequestDto.getEmail())) {
-            throw new IllegalArgumentException("Un utilisateur avec cet email existe déjà.");
+            throw new BadRequestException("Un utilisateur avec cet email existe déjà.");
+        }
+        else if (authenticationService.hasUserWithName(registerRequestDto.getName())) {
+            throw new BadRequestException("Un utilisateur avec ce nom existe déjà.");
         }
 
-        AuthReponse authReponse = authenticationService.register(registerRequestDto);
-
-        return ResponseEntity.ok(authReponse);
+        return authenticationService.register(registerRequestDto);        
     }
 
     @PostMapping("login")
     public ResponseEntity<AuthReponse> authenticate(@RequestBody LoginRequestDto loginRequestDto) {
 
-        AuthReponse authReponse = authenticationService.authenticate(loginRequestDto);
-
-        return ResponseEntity.ok(authReponse);
+        try {
+            return authenticationService.authenticate(loginRequestDto);
+        }
+        catch (AuthenticationException e) {
+            throw new UnauthorizedException("Email ou mot de passe incorrect.");
+        }
     }
 
     @GetMapping("me")
