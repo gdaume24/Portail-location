@@ -1,6 +1,6 @@
 {
   "uuid": "ffd05a6e-5bb2-45d3-946f-579f02abf15f",
-  "lastMigration": 32,
+  "lastMigration": 33,
   "name": "Rental oc",
   "endpointPrefix": "api",
   "latency": 0,
@@ -17,7 +17,7 @@
           "uuid": "486b6796-e152-4cdf-b026-9354d82573ee",
           "body": "{}",
           "latency": 0,
-          "statusCode": 400,
+          "statusCode": 200,
           "label": "",
           "headers": [],
           "filePath": "",
@@ -58,7 +58,7 @@
           "uuid": "d0d127a5-a587-4c9b-9bbf-057547259f23",
           "body": "{\n  \"token\": \"jwt\"\n}",
           "latency": 0,
-          "statusCode": 200,
+          "statusCode": 401,
           "label": "",
           "headers": [],
           "filePath": "",
@@ -75,7 +75,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "b7deb5d9-cf12-4be6-8333-6fe950db8d7a",
@@ -153,7 +155,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "4ec9ad05-3697-4566-9d35-330a6e3bd919",
@@ -250,7 +254,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "09cd47fb-a46d-4e0e-9c8f-b076dbf5b1da",
@@ -314,7 +320,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "d5e029c9-d464-4946-8b07-827ce9bdb063",
@@ -370,7 +378,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "5452fb98-299c-4b5c-bfa6-5ed574c429e1",
@@ -426,7 +436,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "5d686707-6d62-4435-a097-a973c42ed3f4",
@@ -482,7 +494,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "0dac1d38-e8bf-433c-9e13-bd07cf8f29ff",
@@ -538,7 +552,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "6a38eaa5-7498-4ec9-861e-e289ede7ac86",
@@ -594,7 +610,9 @@
         }
       ],
       "responseMode": null,
-      "type": "http"
+      "type": "http",
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "proxyMode": false,

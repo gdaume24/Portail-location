@@ -1,5 +1,6 @@
 package com.rentals.services;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,18 +33,18 @@ public class AuthenticationService {
         this.jwtService = jwtService;
     }
 
-    public AuthReponse register(RegisterRequestDto registerRequestDto) {
+    public ResponseEntity<AuthReponse> register(RegisterRequestDto registerRequestDto) {
         User user = new User()
                 .setName(registerRequestDto.getName())
                 .setEmail(registerRequestDto.getEmail())
                 .setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
         User registeredUser = userRepository.save(user);
         AuthReponse authReponse = createAuthReponse(registeredUser);
-
-        return authReponse;
+        
+        return ResponseEntity.ok(authReponse);
     }
 
-    public AuthReponse authenticate(LoginRequestDto loginRequestDto) {
+    public ResponseEntity<AuthReponse> authenticate(LoginRequestDto loginRequestDto) {
         
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -54,7 +55,7 @@ public class AuthenticationService {
         User authenticatedUser = (User) authentication.getPrincipal();
         AuthReponse authReponse = createAuthReponse(authenticatedUser);
 
-        return authReponse;
+        return ResponseEntity.ok(authReponse);
     }
 
     private AuthReponse createAuthReponse(User user) {
@@ -64,5 +65,9 @@ public class AuthenticationService {
 
     public boolean hasUserWithEmail(String email) {
         return userRepository.findByEmail(email).isPresent();
+    }
+    
+    public boolean hasUserWithName(String name) {
+        return userRepository.findByName(name).isPresent();
     }
 }
