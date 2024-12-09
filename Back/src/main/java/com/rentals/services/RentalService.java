@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -44,12 +45,16 @@ public class RentalService {
 
         User currentUser = userService.getAuthenticatedUser();        
         
+        // Récupère le fichier image
         MultipartFile multipartFile = postRentalRequestDto.getPicture();
         String filename = multipartFile.getOriginalFilename();
         if (filename == null) {
             throw new IllegalArgumentException("The uploaded file must have a name.");
         }
+        // Enlève le chemin du fichier, garde l'extension et génère un nom unique
         String fileName = StringUtils.cleanPath(filename);
+        String fileExtension = filename.substring(filename.lastIndexOf("."));
+        String uniqueFileName = UUID.randomUUID().toString() + fileExtension;
 
         // On créé un objet Rental avec le nom du fichier image, l'user sert à indiquer à la clef étrangère de quel user il s'agit
         Rental rental = new Rental();
@@ -58,7 +63,7 @@ public class RentalService {
         rental.setPrice(postRentalRequestDto.getPrice());
         rental.setDescription(postRentalRequestDto.getDescription());
         rental.setUser(currentUser);
-        rental.setPicture(fileName);
+        rental.setPicture(uniqueFileName);
 
         // Le chemin d'enregistrement des images est défini dans le fichier application.properties (C:\Tests)
         Path uploadPath = Paths.get(uploadDir);
@@ -69,7 +74,7 @@ public class RentalService {
 
         // Enregistre l'image
         try (InputStream inputStream = multipartFile.getInputStream()) {
-            Path filePath = uploadPath.resolve(fileName);
+            Path filePath = uploadPath.resolve(uniqueFileName);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (java.io.IOException e) {
             throw new RuntimeException("Could not save uploaded file: " + fileName, e);
